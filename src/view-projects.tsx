@@ -32,6 +32,8 @@ export default function Command() {
       {projects?.map((project) => {
         const url = project.gitRemotes.at(0)?.url;
 
+        // If the project is not a worktree, then directly link to the repo folder
+        // instead of opening the worktree list
         if (!project.isWorktree && project.worktrees.length === 1) {
           return (
             <Item
@@ -50,7 +52,7 @@ export default function Command() {
         return (
           <List.Item
             key={project.id}
-            icon={project.isWorktree ? Icon.Duplicate : Icon.Folder}
+            icon={project.isWorktree ? Icon.AppWindowGrid2x2 : Icon.Folder}
             title={project.name}
             subtitle={project.displayPath}
             actions={
