@@ -49,7 +49,7 @@ export const Item = memo(
     const currentCommit = branchInformation.commit === undefined ? worktree.commit : branchInformation.commit;
 
     // Check if this is a regular Git repository (not a worktree)
-    const isRegularRepo = project?.fullPath === worktree.path;
+    const isRegularRepo = project?.isWorktree === false;
 
     return (
       <List.Item
@@ -67,6 +67,7 @@ export const Item = memo(
             <ActionPanel.Section title={isRegularRepo ? "Repository Actions" : "Worktree Actions"}>
               <OpenEditor
                 worktree={worktree}
+                isWorktree={project?.isWorktree ?? false}
                 extraActions={async () => {
                   await Promise.all([rankBareRepository?.("increment"), rankWorktree?.("increment")]);
                 }}

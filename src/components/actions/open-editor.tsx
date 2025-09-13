@@ -3,7 +3,15 @@ import { getPreferences, resizeEditorWindow } from "#/helpers/raycast";
 import { withToast } from "#/helpers/toast";
 import { Action, open } from "@raycast/api";
 
-export const OpenEditor = ({ worktree, extraActions }: { worktree: Worktree; extraActions?: () => Promise<void> }) => {
+export const OpenEditor = ({
+  worktree,
+  isWorktree,
+  extraActions,
+}: {
+  worktree: Worktree;
+  isWorktree: boolean;
+  extraActions?: () => Promise<void>;
+}) => {
   const { editorApp } = getPreferences();
 
   if (!editorApp) return null;
@@ -21,8 +29,8 @@ export const OpenEditor = ({ worktree, extraActions }: { worktree: Worktree; ext
 
           return resizeEditorWindow(editorApp);
         },
-        onSuccess: () => `Opening worktree in ${editorApp.name}`,
-        onFailure: () => `Failed to open worktree in ${editorApp.name}`,
+        onSuccess: () => `Opening ${isWorktree ? "worktree" : "repository"} in ${editorApp.name}`,
+        onFailure: () => `Failed to open ${isWorktree ? "worktree" : "repository"} in ${editorApp.name}`,
       })}
     />
   );
