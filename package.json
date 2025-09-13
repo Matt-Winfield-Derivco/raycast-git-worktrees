@@ -85,6 +85,15 @@
       "default": false
     },
     {
+      "type": "checkbox",
+      "label": "Include Non-Worktree Projects",
+      "name": "includeNonWorktreeProjects",
+      "title": "Include Non-Worktree Projects",
+      "description": "Include regular Git repositories (non-worktree projects) in the project list and worktree views",
+      "required": false,
+      "default": false
+    },
+    {
       "type": "textfield",
       "name": "maxScanningLevels",
       "title": "Max Scanning Levels (folder recursion)",

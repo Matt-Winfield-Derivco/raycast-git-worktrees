@@ -6,6 +6,7 @@ export const CACHE_KEYS = {
   WORKTREES: "worktrees",
   DIRECTORIES: "directories",
   LAST_PROJECT_DIR: "lastProjectDir",
+  LAST_INCLUDE_REGULAR: "lastIncludeRegular",
 };
 
 export const BARE_REPOSITORY = "bare";

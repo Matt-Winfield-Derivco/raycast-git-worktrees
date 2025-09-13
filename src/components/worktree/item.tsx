@@ -46,6 +46,9 @@ export const Item = memo(
     const isDirty = branchInformation.isDirty === undefined ? worktree.dirty : branchInformation.isDirty;
     const currentCommit = branchInformation.commit === undefined ? worktree.commit : branchInformation.commit;
 
+    // Check if this is a regular Git repository (not a worktree)
+    const isRegularRepo = project?.fullPath === worktree.path;
+
     return (
       <List.Item
         id={worktree.id}
@@ -59,7 +62,7 @@ export const Item = memo(
         ]}
         actions={
           <ActionPanel>
-            <ActionPanel.Section title="Worktree Actions">
+            <ActionPanel.Section title={isRegularRepo ? "Repository Actions" : "Worktree Actions"}>
               <OpenEditor
                 worktree={worktree}
                 extraActions={async () => {
@@ -68,14 +71,21 @@ export const Item = memo(
               />
               <OpenTerminal path={worktree.path} />
 
-              <RemoveWorktree worktree={worktree} revalidateProjects={revalidateProjects} />
-              <RenameWorktree worktree={worktree} revalidateProjects={revalidateProjects} />
-              <Action.Push
-                title="Add New Worktree"
-                icon={Icon.Plus}
-                target={<AddWorktree directory={project?.fullPath} />}
-                shortcut={{ modifiers: ["cmd"], key: "n" }}
-              />
+              {!isRegularRepo && (
+                <>
+                  <RemoveWorktree worktree={worktree} revalidateProjects={revalidateProjects} />
+                  <RenameWorktree worktree={worktree} revalidateProjects={revalidateProjects} />
+                </>
+              )}
+
+              {project?.fullPath && (
+                <Action.Push
+                  title="Add New Worktree"
+                  icon={Icon.Plus}
+                  target={<AddWorktree directory={project.fullPath} />}
+                  shortcut={{ modifiers: ["cmd"], key: "n" }}
+                />
+              )}
             </ActionPanel.Section>
 
             <ActionPanel.Section title="Extra Actions">
