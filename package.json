@@ -5,6 +5,7 @@
   "description": "Efficiently managing Git worktrees with actions for cloning, listing, adding, renaming and removing worktrees within projects",
   "icon": "extension_icon.png",
   "author": "philstainer",
+  "owner": "matt-winfield",
   "categories": [
     "Developer Tools"
   ],
