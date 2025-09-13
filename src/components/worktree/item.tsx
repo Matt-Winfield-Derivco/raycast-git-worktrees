@@ -53,7 +53,7 @@ export const Item = memo(
       <List.Item
         id={worktree.id}
         key={worktree.branch}
-        icon={Icon.Tree}
+        icon={isRegularRepo ? Icon.Folder : Icon.Tree}
         title={relative(project?.fullPath ?? projectsPath, worktree.path)}
         subtitle={`${worktree.branch ?? "detached"} @ ${currentCommit?.slice(0, 7) ?? "none"}`}
         accessories={[
