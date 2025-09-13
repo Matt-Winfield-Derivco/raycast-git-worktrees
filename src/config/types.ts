@@ -11,6 +11,7 @@ export type BareRepository = {
   pathParts: string[];
   primaryDirectory: string;
   gitRemotes: Repo[];
+  isWorktree: boolean;
 };
 
 export type Worktree = {

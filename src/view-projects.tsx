@@ -34,7 +34,7 @@ export default function Command() {
         return (
           <List.Item
             key={project.id}
-            icon={Icon.Folder}
+            icon={project.isWorktree ? Icon.Duplicate : Icon.Folder}
             title={project.name}
             subtitle={project.displayPath}
             actions={

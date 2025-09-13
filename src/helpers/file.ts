@@ -66,6 +66,7 @@ export const findBareRepos = async (searchDir: string): Promise<BareRepository[]
       pathParts,
       primaryDirectory: pathParts.at(-2) || "",
       gitRemotes: await parseGitRemotes(path),
+      isWorktree: true,
     };
   });
 };
@@ -100,6 +101,7 @@ export const findRegularGitRepos = async (searchDir: string): Promise<BareReposi
       pathParts,
       primaryDirectory: pathParts.at(-2) || "",
       gitRemotes: await parseGitRemotes(path),
+      isWorktree: false,
     };
   });
 };
