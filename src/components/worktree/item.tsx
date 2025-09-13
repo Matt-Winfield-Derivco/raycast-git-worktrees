@@ -57,7 +57,7 @@ export const Item = memo(
         title={relative(project?.fullPath ?? projectsPath, worktree.path)}
         subtitle={`${worktree.branch ?? "detached"} @ ${currentCommit?.slice(0, 7) ?? "none"}`}
         accessories={[
-          ...(isDirty ? [{ text: { value: "U", color: Color.Yellow }, tooltip: "Unsaved Changes" }] : []),
+          ...(isDirty ? [{ text: { value: "U", color: Color.Yellow }, tooltip: "Uncommitted Changes" }] : []),
           ...(gitRemote?.icon ? [{ icon: gitRemote.icon, tooltip: gitRemote.host }] : []),
         ]}
         actions={
