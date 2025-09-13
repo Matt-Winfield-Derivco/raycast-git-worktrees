@@ -7,6 +7,7 @@ import { getPreferences } from "#/helpers/raycast";
 import { useProjects } from "#/hooks/use-projects";
 import { Action, ActionPanel, Icon, List } from "@raycast/api";
 import AddWorktree from "./add-worktree";
+import { Item } from "./components/worktree/item";
 import { EmptyWorktreeList } from "./view-worktrees";
 
 export default function Command() {
@@ -30,6 +31,21 @@ export default function Command() {
     <List isLoading={isLoadingProjects}>
       {projects?.map((project) => {
         const url = project.gitRemotes.at(0)?.url;
+
+        if (!project.isWorktree && project.worktrees.length === 1) {
+          return (
+            <Item
+              key={project.worktrees[0].id}
+              title={project.name}
+              project={project}
+              worktree={project.worktrees[0]}
+              rankBareRepository={(action) =>
+                action === "increment" ? visitProject?.(project) : resetProjectRanking?.(project)
+              }
+              revalidateProjects={revalidateProjects}
+            />
+          );
+        }
 
         return (
           <List.Item
